@@ -189,10 +189,11 @@
         <option value="W" style="background-color: grey">Неделя</option>
         <option value="0" style="background-color: grey">Ручное</option>
     </select>
-    <button id="add">dalee</button>
+    <button id="add" onclick="confirmSubmit()">Создать</button>
 
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
+
         const ahtInput = document.getElementById('aht');
         const delayInput = document.getElementById('delay');
         const pointInput = document.getElementById('point')
@@ -213,27 +214,29 @@
         let tg = window.Telegram.WebApp;
         let accept = document.getElementById("add");
         accept.addEventListener("click", () => {
+            let descrip = document.getElementById('type').value;
+            let aht = document.getElementById('aht').value;
+            let delay = document.getElementById('delay').value;
+            let point = document.getElementById('point').value;
+            let period = document.getElementById('period').value;
+            let name = document.getElementById('ach_name').value;
+            let data = {
+                "descrip": descrip,
+                "ach_name": name,
+                "aht": aht,
+                "delay": delay,
+                "point": point,
+                "period": period
+            }
             if (confirmSubmit()) {
-                let descrip = document.getElementById('type').value;
-                let aht = document.getElementById('aht').value;
-                let delay = document.getElementById('delay').value;
-                let point = document.getElementById('point').value;
-                let period = document.getElementById('period').value;
-                let name = document.getElementById('ach_name').value;
-                let data = {
-                    "descrip": descrip,
-                    "ach_name": name,
-                    "aht": aht,
-                    "delay": delay,
-                    "point": point,
-                    "period": period
-                }
                 tg.sendData(JSON.stringify(data));
                 tg.close();
             }
+
         })
-        
+
         function confirmSubmit() {
+            // Сообщение с подтверждением
             const message = "Внимание! Будет создана ачивка:\n" +
                 "\nДолжность: " + data['descrip'] +
                 "\nНазвание: " + data['ach_name'] +
@@ -242,7 +245,6 @@
                 "\nНачисление: " + data['period'].replace('0', 'Ручное').replace('W', 'Еженедельное').replace('M', 'Ежемесячное') +
                 "\nБаллы: " + data['point'];
             return confirm(message);
-
         }
     </script>
 </form>
