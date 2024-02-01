@@ -129,6 +129,7 @@
             display: block;
             height: 50px;
             width: 100%;
+            color: #f5f5f5;
             background-color: rgba(255, 255, 255, 0.07);
             border-radius: 3px;
             padding: 0 10px;
@@ -137,8 +138,9 @@
             font-weight: 300;
         }
 
+
         .social div {
-            background: red;
+            background: #ffffff;
             width: 150px;
             border-radius: 3px;
             padding: 5px 10px 10px 5px;
@@ -170,24 +172,41 @@
     <h3>Добавление ачивки</h3>
     <label for="type">Должность</label>
     <select class="form-control" id="type">
-        <option value="Специалист первой линии">Специалист первой линии</option>
-        <option value="Ведущий специалист первой линии">Ведущий специалист первой линии</option>
-        <option value="Специалист второй линии">Специалист второй линии</option>
-        <option value="Ведущий специалист второй линии">Ведущий специалист второй линии</option>
-        <option value="Эксперт второй линии">Эксперт второй линии</option>
+        <option value="Специалист первой линии" style="background-color: grey">Специалист первой линии</option>
+        <option value="Ведущий специалист первой линии" style="background-color: grey">Ведущий специалист первой линии</option>
+        <option value="Специалист второй линии" style="background-color: grey">Специалист второй линии</option>
+        <option value="Ведущий специалист второй линии" style="background-color: grey">Ведущий специалист второй линии</option>
+        <option value="Эксперт второй линии" style="background-color: grey">Эксперт второй линии</option>
     </select>
     <input type="text" placeholder="AHT" id="aht">
     <input type="text" placeholder="Delay" id="delay">
     <input type="text" placeholder="Баллы" id="point">
     <select class="form-control" id="duration">
-    <option value="M">Месяц</option>
-    <option value="W">Неделя</option>
-    <option value="0">Ручное</option>
+    <option value="M" style="background-color: grey">Месяц</option>
+    <option value="W" style="background-color: grey">Неделя</option>
+    <option value="0" style="background-color: grey">Ручное</option>
     </select>
     <button id="add">Готово</button>
-    
+
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
+        const ahtInput = document.getElementById('aht');
+        const delayInput = document.getElementById('delay');
+        const pointInput = document.getElementById('point')
+
+        ahtInput.onkeyup = function(event) {
+          event.target.value = event.target.value.replace(/[^0-9]/g, '');
+        };
+
+        delayInput.onkeyup = function(event) {
+          event.target.value = event.target.value.replace(/[^0-9]/g, '');
+        };
+
+        pointInput.onkeyup = function(event) {
+          event.target.value = event.target.value.replace(/[^0-9]/g, '');
+        };
+
+
         let tg = window.Telegram.WebApp;
         let accept = document.getElementById("add");
         accept.addEventListener("click", () => {
