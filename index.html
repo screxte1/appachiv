@@ -215,17 +215,17 @@
             let aht = document.getElementById('aht').value;
             let delay = document.getElementById('delay').value;
             let point = document.getElementById('point').value;
-            let duration = document.getElementById('period').value;
+            let period = document.getElementById('period').value;
             let name = document.getElementById('ach_name').value;
             tg.close();
 
             let data = {
                 "descrip": descrip,
-                "name": name,
+                "ach_name": name,
                 "aht": aht,
                 "delay": delay,
                 "point": point,
-                "period": duration
+                "period": period
             }
             tg.sendData(JSON.stringify(data));
         })
