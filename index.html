@@ -228,11 +228,8 @@
                 "point": point,
                 "period": period
             }
-            if (confirmSubmit()) {
-                tg.sendData(JSON.stringify(data));
-                tg.close();
-            }
-
+            tg.sendData(JSON.stringify(data));
+            tg.close();
         })
 
         function confirmSubmit() {
