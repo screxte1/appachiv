@@ -103,6 +103,7 @@
             let aht = document.getElementById('aht').value;
             let delay = document.getElementById('delay').value;
             let point = document.getElementById('point').value;
+            let duration = document.getElementById('duration').value;
             tg.close();
 
             let data = {
@@ -110,6 +111,7 @@
                 "aht": aht,
                 "delay": delay,
                 "point": point,
+                "value": duration
             }
             tg.sendData(JSON.stringify(data));
         })
