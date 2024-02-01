@@ -178,10 +178,9 @@
         <option value="Ведущий специалист второй линии" style="background-color: grey">Ведущий специалист второй линии</option>
         <option value="Эксперт второй линии" style="background-color: grey">Эксперт второй линии</option>
     </select>
-    <input type="text" placeholder="Название ачивки" id="ach_name">
-    <input type="text" placeholder="AHT" id="aht">
-    <input type="text" placeholder="Delay" id="delay">
-    <input type="text" placeholder="Баллы" id="point">
+    <input type="number" placeholder="AHT" id="aht">
+    <input type="number" placeholder="Delay" id="delay">
+    <input type="number" placeholder="Баллы" id="point">
     <select class="form-control" id="duration">
     <option value="M" style="background-color: grey">Месяц</option>
     <option value="W" style="background-color: grey">Неделя</option>
@@ -194,11 +193,11 @@
         const ahtInput = document.getElementById('aht');
         const delayInput = document.getElementById('delay');
         const pointInput = document.getElementById('point')
-
+        
         ahtInput.onkeyup = function(event) {
           event.target.value = event.target.value.replace(/[^0-9]/g, '');
         };
-
+        
         delayInput.onkeyup = function(event) {
           event.target.value = event.target.value.replace(/[^0-9]/g, '');
         };
@@ -211,21 +210,19 @@
         let tg = window.Telegram.WebApp;
         let accept = document.getElementById("add");
         accept.addEventListener("click", () => {
-            let descrip = document.getElementById('type').value;
+            let post = document.getElementById('type').value;
             let aht = document.getElementById('aht').value;
-            let ach_name = document.getElementById('ach_name').value;
             let delay = document.getElementById('delay').value;
             let point = document.getElementById('point').value;
             let duration = document.getElementById('duration').value;
             tg.close();
 
             let data = {
-                "ach_name": ach_name,
-                "descrip": descrip,
+                "post": post,
                 "aht": aht,
                 "delay": delay,
                 "point": point,
-                "period": period
+                "value": duration
             }
             tg.sendData(JSON.stringify(data));
         })
