@@ -6,22 +6,17 @@
     <style>
         body {
             font-family: sans-serif;
-            width: 500px;
-            margin: 0 auto;
+            width: 100%;
+            margin: 0;
             background-color: aliceblue;
         }
 
         h1 {
             text-align: center;
-            font-size: 20px;
+            font-size: 30px;
         }
 
         .form-group {
-            margin-bottom: 20px;
-            width: 30%;
-        }
-
-        .form-group2 {
             margin-bottom: 20px;
             width: 50%;
         }
@@ -39,63 +34,68 @@
         .comment {
             height: 100px;
         }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .form {
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
-<div id="main">
+<div class="container">
     <h1>Добавление ачивки</h1>
 
-    <div class="form-group2">
-        <label for="type">Должность</label>
-        <select class="form-control" id="type">
-            <option value="1">Специалист первой линии</option>
-            <option value="2">Ведущий специалист первой линии</option>
-            <option value="3">Специалист второй линии</option>
-            <option value="4">Ведущий специалист второй линии</option>
-            <option value="5">Эксперт второй линии</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="aht">Количество баллов за выполнение</label>
-        <input type="number" class="form-control" id="point" value="0">
-    </div>
+    <form action="/action" method="post" class="form">
+        <div class="form-group">
+            <label for="type">Должность</label>
+            <select class="form-control" id="type">
+                <option value="Специалист первой линии">Специалист первой линии</option>
+                <option value="Ведущий специалист первой линии">Ведущий специалист первой линии</option>
+                <option value="Специалист второй линии">Специалист второй линии</option>
+                <option value="Ведущий специалист второй линии">Ведущий специалист второй линии</option>
+                <option value="Эксперт второй линии">Эксперт второй линии</option>
+            </select>
+        </div>
 
-    <div class="form-group">
-        <label for="aht">AHT</label>
-        <input type="number" class="form-control" id="aht" value="0">
-    </div>
+        <div class="form-group">
+            <label for="aht">Количество баллов за выполнение</label>
+            <input type="points" class="form-control" id="points" name="aht" value="0">
+        </div>
 
-    <div class="form-group">
-        <label for="delay">Delay</label>
-        <input type="number" class="form-control" id="delay" value="0">
-    </div>
+        <div class="form-group">
+            <label for="aht">АХТ</label>
+            <input type="aht" class="form-control" id="aht" name="aht" value="0">
+        </div>
 
-    <div class="form-group">
-        <label for="comment">Комментарий</label>
-        <textarea class="form-control" id="comment"></textarea>
-    </div>
+        <div class="form-group">
+            <label for="aht">Delay</label>
+            <input type="delay" class="form-control" id="delay" name="aht" value="0">
+        </div>
 
-    <button id="add">Добавить</button>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script>
-        let tg = window.Telegram.WebApp;
-        let accept = document.getElementById("add");
-        accept.addEventListener("click", () => {
-            let post = document.getElementById('type').value;
-            let aht = document.getElementById('aht').value;
-            let delay = document.getElementById('delay').value;
-            let point = document.getElementById('point').value;
-            tg.close();
+        <div class="form-group">
+            <label for="duration">Начисление</label>
+            <select class="form-control" id="duration" name="duration">
+                <option value="W">Неделя</option>
+                <option value="M">Месяц</option>
+                <option value="0">Ручное</option>
+            </select>
+        </div>
 
-            let data = {
-                "post": post,
-                "aht": aht,
-                "delay": delay,
-                "point": point,
-            }
-            tg.sendData(JSON.stringify(data));
-        })
-    </script>
+        <button type="submit" class="btn btn-primary">Добавить</button>
+    </form>
 </div>
 </body>
 </html>
