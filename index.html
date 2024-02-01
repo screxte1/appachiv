@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: sans-serif;
-            width: 40%;
+            width: 100%;
             margin: 0;
             background-color: aliceblue;
         }
@@ -23,10 +23,9 @@
         }
 
         .form-control {
-            width: 80%;
+            width: 30%;
             padding: 10px;
             border: 1px solid #ccc;
-            text-align: center;
         }
 
         .button {
@@ -35,48 +34,44 @@
             border-radius: 5px;
             margin-top: 20px;
         }
-
     </style>
 </head>
 <body>
 <div id="main">
-<h1>Добавление ачивки</h1>
-<table>
-  <tr>
-    <th>Дожность</th>
-    <td>
-      <select class="form-control" id="type">
-        <option value="Специалист первой линии">Специалист первой линии</option>
-        <option value="Ведущий специалист первой линии">Ведущий специалист первой линии</option>
-        <option value="Специалист второй линии">Специалист второй линии</option>
-        <option value="Ведущий специалист второй линии">Ведущий специалист второй линии</option>
-        <option value="Эксперт второй линии">Эксперт второй линии</option>
-      </select>
-    </td>
-  </tr>
-  <tr>
-    <th>AHT</th>
-    <td>
-      <input type="number" class="form-control" id="aht" value="0">
-    </td>
-  </tr>
-  <tr>
-    <th>Delay</th>
-    <td>
-      <input type="number" class="form-control" id="delay" value="0">
-    </td>
-  </tr>
-  <tr>
-    <th>Начисление</th>
-    <td>
-      <select class="form-control" id="duration">
-        <option value="W">Неделя</option>
-        <option value="M">Месяц</option>
-        <option value="0">Ручное</option>
-      </select>
-    </td>
-  </tr>
-</table>
+    <h1>Добавление ачивки</h1>
+    <div class="form-group2">
+        <label for="type">Должность</label>
+        <select class="form-control" id="type">
+            <option value="Специалист первой линии">Специалист первой линии</option>
+            <option value="Ведущий специалист первой линии">Ведущий специалист первой линии</option>
+            <option value="Специалист второй линии">Специалист второй линии</option>
+            <option value="Ведущий специалист второй линии">Ведущий специалист второй линии</option>
+            <option value="Эксперт второй линии">Эксперт второй линии</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="aht">Количество баллов за выполнение</label>
+        <input type="number" class="form-control" id="point" value="0">
+    </div>
+
+    <div class="form-group">
+        <label for="aht">AHT</label>
+        <input type="number" class="form-control" id="aht" value="0">
+    </div>
+
+    <div class="form-group">
+        <label for="delay">Delay</label>
+        <input type="number" class="form-control" id="delay" value="0">
+    </div>
+
+    <div class="form-group2">
+        <label for="type">Начисление</label>
+        <select class="form-control" id="duration">
+            <option value="W">Неделя</option>
+            <option value="M">Месяц</option>
+            <option value="0">Ручное</option>
+        </select>
+    </div>
     <div class="button">
     <button id="add">Добавить</button>
     </div>
