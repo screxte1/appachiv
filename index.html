@@ -46,7 +46,7 @@
             border-radius: 5px;
         }
 
-        .button {
+        .btn {
             width: 100%;
             padding: 10px;
             border-radius: 5px;
@@ -55,7 +55,7 @@
     </style>
 </head>
 <body>
-<div id="main">
+<div class="container">
     <h1>Добавление ачивки</h1>
 
     <div class="form-group2">
@@ -91,9 +91,7 @@
             <option value="0">Ручное</option>
         </select>
     </div>
-    <div class="button">
-    <button id="add">Добавить</button>
-    </div>
+    <button type="submit" class="btn btn-primary">Добавить</button>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
         let tg = window.Telegram.WebApp;
