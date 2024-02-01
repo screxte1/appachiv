@@ -6,8 +6,8 @@
     <style>
         body {
             font-family: sans-serif;
-            width: 100%;
-            margin: 0;
+            width: 500px;
+            margin: 0 auto;
             background-color: aliceblue;
         }
 
@@ -18,7 +18,12 @@
 
         .form-group {
             margin-bottom: 20px;
-            width: 100%;
+            width: 30%;
+        }
+
+        .form-group2 {
+            margin-bottom: 20px;
+            width: 50%;
         }
 
         .form-control {
@@ -34,19 +39,13 @@
         .comment {
             height: 100px;
         }
-
-        @media (max-width: 768px) {
-            .form-group {
-                width: 100%;
-            }
-        }
     </style>
 </head>
 <body>
 <div id="main">
     <h1>Добавление ачивки</h1>
 
-    <div class="form-group">
+    <div class="form-group2">
         <label for="type">Должность</label>
         <select class="form-control" id="type">
             <option value="1">Специалист первой линии</option>
@@ -56,9 +55,8 @@
             <option value="5">Эксперт второй линии</option>
         </select>
     </div>
-
     <div class="form-group">
-        <label for="point">Количество баллов за выполнение</label>
+        <label for="aht">Количество баллов за выполнение</label>
         <input type="number" class="form-control" id="point" value="0">
     </div>
 
@@ -78,6 +76,26 @@
     </div>
 
     <button id="add">Добавить</button>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script>
+        let tg = window.Telegram.WebApp;
+        let accept = document.getElementById("add");
+        accept.addEventListener("click", () => {
+            let post = document.getElementById('type').value;
+            let aht = document.getElementById('aht').value;
+            let delay = document.getElementById('delay').value;
+            let point = document.getElementById('point').value;
+            tg.close();
+
+            let data = {
+                "post": post,
+                "aht": aht,
+                "delay": delay,
+                "point": point,
+            }
+            tg.sendData(JSON.stringify(data));
+        })
+    </script>
 </div>
 </body>
 </html>
