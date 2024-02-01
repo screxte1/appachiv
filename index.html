@@ -187,7 +187,7 @@
     <option value="W" style="background-color: grey">Неделя</option>
     <option value="0" style="background-color: grey">Ручное</option>
     </select>
-    <button id="add">Готово</button>
+    <button id="add">Создать</button>
 
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
@@ -211,14 +211,13 @@
         let tg = window.Telegram.WebApp;
         let accept = document.getElementById("add");
         accept.addEventListener("click", () => {
+
             let descrip = document.getElementById('type').value;
             let aht = document.getElementById('aht').value;
             let delay = document.getElementById('delay').value;
             let point = document.getElementById('point').value;
             let period = document.getElementById('period').value;
             let name = document.getElementById('ach_name').value;
-            tg.close();
-
             let data = {
                 "descrip": descrip,
                 "ach_name": name,
@@ -227,7 +226,30 @@
                 "point": point,
                 "period": period
             }
+            confirmSubmit()
+
+            function confirmSubmit() {
+                // Сообщение с подтверждением
+                const message = "Внимание! Будет создана ачивка:\n" +
+                    "\nДолжность: " + data['descrip'] +
+                    "\nНазвание: " + data['ach_name'] +
+                    "\nAHT: " + data["aht"] +
+                    "\nDelay: " + data["delay"] +
+                    "\nНачисление: " + data['period'].replace('0', 'Ручное').replace('W', 'Еженедельное').replace('M', 'Ежемесячное') +
+                    "\nБаллы: " + data['point'];
+
+                  // Вывод модального окна
+                  if (!confirm(message)) {
+                    return false;
+                  }
+
+                  // Отправка формы
+                  return true;
+                }
+
+
             tg.sendData(JSON.stringify(data));
+            tg.close();
         })
     </script>
 </form>
