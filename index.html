@@ -192,7 +192,7 @@
     <button id="add">Создать</button>
     <button id="manager">Менеджер(разработка)</button>
 </form>
-<form id="secondForm" style="display: none" onload="getAch()">
+<form id="secondForm" style="display: none">
     <h3>Менеджер ачивок</h3>
     <select class="form-control" id="remove">
     </select>
@@ -205,23 +205,17 @@
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script>
 
-    async function getAch() {
-        const response = await fetch("/get_ach_js");
-        const data = await response.json();
-
-        const select = document.getElementById("remove");
-        for (const option of data) {
-            const newOption = document.createElement("option");
-            newOption.text = option.name;
-            select.appendChild(newOption);
-        }
-    }
-
-
     let manager = document.getElementById("manager");
     manager.addEventListener("click", (event) => {
         document.getElementById("firstForm").style.display = "none";
         document.getElementById("secondForm").style.display = "block";
+        event.preventDefault();
+    });
+
+    let back = document.getElementById("main");
+    back.addEventListener("click", (event) => {
+        document.getElementById("firstForm").style.display = "block";
+        document.getElementById("secondForm").style.display = "none";
         event.preventDefault();
     });
 
