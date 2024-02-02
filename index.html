@@ -109,7 +109,7 @@
         }
 
         button {
-            margin-top: 50px;
+            margin-top: 20px;
             width: 100%;
             background-color: #f0f0f0;
             color: #080710;
@@ -168,7 +168,7 @@
     <div class="shape"></div>
     <div class="shape"></div>
 </div>
-<form>
+<form id="firstForm" style="display: block">
     <h3>Добавление ачивки</h3>
     <label for="type">Должность</label>
     <select class="form-control" id="type">
@@ -190,63 +190,91 @@
         <option value="0" style="background-color: grey">Ручное</option>
     </select>
     <button id="add">Создать</button>
-
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script>
-
-        const ahtInput = document.getElementById('aht');
-        const delayInput = document.getElementById('delay');
-        const pointInput = document.getElementById('point')
-
-        ahtInput.onkeyup = function (event) {
-            event.target.value = event.target.value.replace(/[^0-9]/g, '');
-        };
-
-        delayInput.onkeyup = function (event) {
-            event.target.value = event.target.value.replace(/[^0-9]/g, '');
-        };
-
-        pointInput.onkeyup = function (event) {
-            event.target.value = event.target.value.replace(/[^0-9]/g, '');
-        };
-
-
-        let tg = window.Telegram.WebApp;
-        let accept = document.getElementById("add");
-
-        accept.addEventListener("click", () => {
-            let descrip = document.getElementById('type').value;
-            let aht = document.getElementById('aht').value;
-            let delay = document.getElementById('delay').value;
-            let point = document.getElementById('point').value;
-            let period = document.getElementById('period').value;
-            let name = document.getElementById('ach_name').value;
-            let data = {
-                "descrip": descrip,
-                "ach_name": name,
-                "aht": aht,
-                "delay": delay,
-                "point": point,
-                "period": period
-            }
-            if(confirmSubmit(data)){
-                tg.sendData(JSON.stringify(data));
-                tg.close();
-            }
-
-
-        })
-        function confirmSubmit(data) {
-            const message = "Внимание! Будет создана ачивка:\n" +
-                "\nДолжность: " + data["descrip"] +
-                "\nНазвание: " + data["ach_name"] +
-                "\nAHT: " + data["aht"] +
-                "\nDelay: " + data["delay"] +
-                "\nНачисление: " + data['period'].replace('0', 'Ручное').replace('W', 'Еженедельное').replace('M', 'Ежемесячное') +
-                "\nБаллы: " + data['point'];
-            return confirm(message);
-        }
-    </script>
+    <button id="manager">Менеджер(разработка)</button>
 </form>
+<form id="secondForm" style="display: none" onload="get_ach()">
+    <h3>Менеджер ачивок</h3>
+    <select class="form-control" id="remove">
+    </select>
+
+    <button id="remove_ach">Удалить</button>
+    <button id="main">Назад</button>
+
+</form>
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script>
+
+    function get_ach() {
+        let ach = CalculateTable.get_ach();
+        for (let i = 0; i < ach.length; i++) {
+            let option = document.createElement("option");
+            option.text = ach[i].Name;
+            document.getElementById("remove").add(option);
+        }
+    }
+
+    let manager = document.getElementById("manager");
+    manager.addEventListener("click", (event) => {
+        document.getElementById("firstForm").style.display = "none";
+        document.getElementById("secondForm").style.display = "block";
+        event.preventDefault();
+    });
+
+    const ahtInput = document.getElementById('aht');
+    const delayInput = document.getElementById('delay');
+    const pointInput = document.getElementById('point')
+
+    ahtInput.onkeyup = function (event) {
+        event.target.value = event.target.value.replace(/[^0-9]/g, '');
+    };
+
+    delayInput.onkeyup = function (event) {
+        event.target.value = event.target.value.replace(/[^0-9]/g, '');
+    };
+
+    pointInput.onkeyup = function (event) {
+        event.target.value = event.target.value.replace(/[^0-9]/g, '');
+    };
+
+
+    let tg = window.Telegram.WebApp;
+    let accept = document.getElementById("add");
+
+    accept.addEventListener("click", () => {
+        let descrip = document.getElementById('type').value;
+        let aht = document.getElementById('aht').value;
+        let delay = document.getElementById('delay').value;
+        let point = document.getElementById('point').value;
+        let period = document.getElementById('period').value;
+        let name = document.getElementById('ach_name').value;
+        let data = {
+            "descrip": descrip,
+            "ach_name": name,
+            "aht": aht,
+            "delay": delay,
+            "point": point,
+            "period": period
+        }
+        if (confirmSubmit(data)) {
+            tg.sendData(JSON.stringify(data));
+            tg.close();
+        }
+
+
+    })
+
+    function confirmSubmit(data) {
+        const message = "Внимание! Будет создана ачивка:\n" +
+            "\nДолжность: " + data["descrip"] +
+            "\nНазвание: " + data["ach_name"] +
+            "\nAHT: " + data["aht"] +
+            "\nDelay: " + data["delay"] +
+            "\nНачисление: " + data['period'].replace('0', 'Ручное').replace('W', 'Еженедельное').replace('M', 'Ежемесячное') +
+            "\nБаллы: " + data['point'];
+        return confirm(message);
+    }
+</script>
+
 </body>
 </html>
