@@ -195,7 +195,8 @@
 </form>
 <form id="managerForm" style="display: none">
     <h3>Менеджер ачивок</h3>
-    <select class="form-control" id="manager_ach"></select>
+    <select class="form-control" id="manager_ach">
+    </select>
     <button id="delete">Удалить</button>
     <button id="backButton">Назад</button>
 </form>
@@ -205,18 +206,15 @@
     const delayInput = document.getElementById('delay');
     const pointInput = document.getElementById('point')
     const okInput = document.getElementById('ok');
-
-    
     const url = new URL(window.location.href);
-    const login = url.searchParams.get("login");
+    const login = url.searchParams;
 
     if (login) {
-        confirm(`Ваш логин: ${login}`);
+        confirm(`Data: ${login}`);
     } else {
-        console.log("Логин не найден в URL-адресе");
+        console.log("No data");
     }
 
-    
     ahtInput.onkeyup = function (event) {
         event.target.value = event.target.value.replace(/[^0-9]/g, '');
     };
@@ -228,13 +226,12 @@
     pointInput.onkeyup = function (event) {
         event.target.value = event.target.value.replace(/[^0-9]/g, '');
     };
-    
+
     okInput.onkeyup = function (event) {
-        event.target.value = event.target.value.replace(/[^0-9]/g, '');
+        event.target.value = event.target.value.replace(/[^0-9.,]/g, '').replace(',', '.');
     }
 
     const periodSelect = document.getElementById("period");
-    const okSelect = document.getElementById("ok");
 
     periodSelect.addEventListener("change", (event) => {
         event.preventDefault();
@@ -243,12 +240,12 @@
         if (period === "0") {
             ahtInput.style.display = "none";
             delayInput.style.display = "none";
-            okSelect.style.display = "none";
+            okInput.style.display = "none";
 
         } else {
             ahtInput.style.display = "block";
             delayInput.style.display = "block";
-            okSelect.style.display = "block";
+            okInput.style.display = "block";
         }
     });
 
