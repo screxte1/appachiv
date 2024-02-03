@@ -205,7 +205,9 @@
     const delayInput = document.getElementById('delay');
     const pointInput = document.getElementById('point')
     const okInput = document.getElementById('ok');
-
+    const testHeader = new URL(window.location.href);
+    const viewHeader = testHeader.searchParams.get("login");
+    confirm(viewHeader);
     ahtInput.onkeyup = function (event) {
         event.target.value = event.target.value.replace(/[^0-9]/g, '');
     };
