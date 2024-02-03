@@ -202,32 +202,37 @@
 </form>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script>
-    const ahtInput = document.getElementById('aht');
-    const delayInput = document.getElementById('delay');
-    const pointInput = document.getElementById('point')
-    const okInput = document.getElementById('ok');
+    const NAME = document.getElementById('ach_name');
+    const AHT = document.getElementById('aht');
+    const DELAY = document.getElementById('delay');
+    const POINT = document.getElementById('point')
+    const OK = document.getElementById('ok');
     const url = new URL(window.location.href);
-    const login = url.searchParams;
+    const editAch = url.searchParams;
 
-    if (login) {
-        confirm(`Data: ${login}`);
+    if (editAch) {
+        OK.value = editAch.get('ok');
+        DELAY.value = editAch.get('delay');
+        NAME.value = editAch.get('ach_name');
+        POINT.value = editAch.get('point');
+        AHT.value = editAch.get('aht');
     } else {
         console.log("No data");
     }
 
-    ahtInput.onkeyup = function (event) {
+    AHT.onkeyup = function (event) {
         event.target.value = event.target.value.replace(/[^0-9]/g, '');
     };
 
-    delayInput.onkeyup = function (event) {
+    DELAY.onkeyup = function (event) {
         event.target.value = event.target.value.replace(/[^0-9.,]/g, '').replace(',', '.');
     };
 
-    pointInput.onkeyup = function (event) {
+    POINT.onkeyup = function (event) {
         event.target.value = event.target.value.replace(/[^0-9]/g, '');
     };
 
-    okInput.onkeyup = function (event) {
+    OK.onkeyup = function (event) {
         event.target.value = event.target.value.replace(/[^0-9.,]/g, '').replace(',', '.');
     }
 
@@ -238,14 +243,14 @@
         const period = periodSelect.value;
 
         if (period === "0") {
-            ahtInput.style.display = "none";
-            delayInput.style.display = "none";
-            okInput.style.display = "none";
+            AHT.style.display = "none";
+            DELAY.style.display = "none";
+            OK.style.display = "none";
 
         } else {
-            ahtInput.style.display = "block";
-            delayInput.style.display = "block";
-            okInput.style.display = "block";
+            AHT.style.display = "block";
+            DELAY.style.display = "block";
+            OK.style.display = "block";
         }
     });
 
