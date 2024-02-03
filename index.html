@@ -209,20 +209,23 @@
     const OK = document.getElementById('ok');
     const url = new URL(window.location.href);
     const editAch = url.searchParams;
-
+    
     if (editAch) {
         OK.value = editAch.get('ok');
         DELAY.value = editAch.get('delay');
         NAME.value = editAch.get('ach_name');
         POINT.value = editAch.get('point');
         AHT.value = editAch.get('aht');
-        document.getElementById('period').value = editAch.get('period');
-        document.getElementById('type').value = editAch.get('type');
+        if(editAch.get('period')){
+            document.getElementById('period').value = editAch.get('period');
+        }
+        if(editAch.get('type')) {
+            document.getElementById('type').value = editAch.get('type');
+        }
 
     } else {
         console.log("No data");
     }
-
     AHT.onkeyup = function (event) {
         event.target.value = event.target.value.replace(/[^0-9]/g, '');
     };
