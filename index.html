@@ -209,6 +209,7 @@
     const OK = document.getElementById('ok');
     const url = new URL(window.location.href);
     const editAch = url.searchParams;
+    console.log(editAch.values())
 
     if (editAch) {
         OK.value = editAch.get('ok');
