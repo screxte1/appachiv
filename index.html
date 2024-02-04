@@ -295,12 +295,12 @@
         let ok = document.getElementById('Ok').value;
         let flr = document.getElementById('Flr').value;
         let data = {
-            "pos": Pos,
+            "description": Pos,
             "name": Name,
             "aht": Aht,
             "delay": Delay,
-            "sc": Sc,
-            "per": Per,
+            "point": Sc,
+            "period": Per,
             "ok": ok,
             "flr": flr
         }
@@ -309,31 +309,32 @@
             tg.close();
         }
     })
-
     function confirmSubmit(data) {
         let message = ""
         const messageNull = 'Внимание, все поля должны быть заполнены!';
-        if (data["per"] === "0") {
-            if (data['pos'] === "" || data["name"] === "" || data["sc"] === "") {
+        if (data["period"] === "0") {
+            if (data['description'] === "" || data["name"] === "" || data["point"] === "") {
                 return confirm(messageNull);
             }
             message = "Внимание! Будет создана ачивка:\n" +
-            "\nДолжность: " + data["pos"] +
+            "\nДолжность: " + data["description"] +
             "\nНазвание: " + data["name"] +
-            "\nНачисление: " + data['per'].replace('0', 'Ручное') +
-            "\nБаллы: " + data['sc'];
+            "\nНачисление: " + data['period'].replace('0', 'Ручное') +
+            "\nБаллы: " + data['point'];
         }
         else{
-            if (data["pos"] === "" || data["name"] === "" || data["aht"] === "" || data["delay"] === "" || data["sc"] === "") {
+            if (data["description"] === "" || data["name"] === "" || data["aht"] === "" || data["delay"] === "" || data["point"] === "") {
                 return confirm(messageNull);
             }
             message = "Внимание! Будет создана ачивка:\n" +
-            "\nДолжность: " + data["pos"] +
+            "\nДолжность: " + data["description"] +
             "\nНазвание: " + data["name"] +
             "\nAHT: " + data["aht"] +
             "\nDelay: " + data["delay"] +
-            "\nНачисление: " + data['per'].replace('0', 'Ручное').replace('W', 'Еженедельное').replace('M', 'Ежемесячное') +
-            "\nБаллы: " + data['sc'];
+            "\nНачисление: " + data['period'].replace('0', 'Ручное').replace('W', 'Еженедельное').replace('M', 'Ежемесячное') +
+            "\nFLR: " + data['flr'] +
+            "\nOK: " + data['ok'] +
+            "\nБаллы: " + data['point'];
         }
         return confirm(message);
     }
