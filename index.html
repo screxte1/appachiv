@@ -189,6 +189,7 @@
     <input type="text" placeholder="Delay" id="Delay">
     <input type="text" placeholder="Баллы" id="Sc">
     <input type="text" placeholder="OK" id="Ok">
+    <input type="text" placeholder="FLR" id="Flr">
 
     <button id="add" title="Добавляет ачивку в базу">Создать</button>
     <button id="manager" title="В разработке, кнопка неактивна">Менеджер ачивок</button>
@@ -207,6 +208,7 @@
     const DELAY = document.getElementById('Delay');
     const POINT = document.getElementById('Sc')
     const OK = document.getElementById('Ok');
+    const FLR = document.getElementById('Flr');
     const url = new URL(window.location.href);
     const editAch = url.searchParams;
 
@@ -216,6 +218,7 @@
         NAME.value = editAch.get('Name');
         POINT.value = editAch.get('Sc');
         AHT.value = editAch.get('Aht');
+        FLR.value = editAch.get('Flr');
         if(editAch.get('Per')){
             document.getElementById('Per').value = editAch.get('Per');
         }
@@ -252,11 +255,13 @@
             AHT.style.display = "none";
             DELAY.style.display = "none";
             OK.style.display = "none";
+            FLR.style.display = "none";
 
         } else {
             AHT.style.display = "block";
             DELAY.style.display = "block";
             OK.style.display = "block";
+            FLR.style.display = "block";
         }
     });
 
@@ -288,13 +293,17 @@
         let Sc = document.getElementById('Sc').value;
         let Per = document.getElementById('Per').value;
         let Name = document.getElementById('Name').value;
+        let ok = document.getElementById('Ok').value;
+        let flr = document.getElementById('Flr').value;
         let data = {
-            "Pos": Pos,
-            "Name": Name,
-            "Aht": Aht,
-            "Delay": Delay,
-            "Sc": Sc,
-            "Per": Per
+            "pos": Pos,
+            "name": Name,
+            "aht": Aht,
+            "delay": Delay,
+            "sc": Sc,
+            "per": Per,
+            "ok": ok,
+            "flr": flr
         }
         if (confirmSubmit(data)) {
             tg.sendData(JSON.stringify(data));
