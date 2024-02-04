@@ -179,7 +179,7 @@
         </option>
         <option value="Эксперт второй линии" style="background-color: grey">Эксперт второй линии</option>
     </select>
-    <select class="form-control" id="Per">
+    <select class="form-control" id="Period">
         <option value="M" style="background-color: grey">Месяц</option>
         <option value="W" style="background-color: grey">Неделя</option>
         <option value="0" style="background-color: grey">Ручное</option>
@@ -219,8 +219,8 @@
         POINT.value = editAch.get('Sc');
         AHT.value = editAch.get('Aht');
         FLR.value = editAch.get('Flr');
-        if(editAch.get('Per')){
-            document.getElementById('Per').value = editAch.get('Per');
+        if(editAch.get('Period')){
+            document.getElementById('Period').value = editAch.get('Period');
         }
         if(editAch.get('type')) {
             document.getElementById('type').value = editAch.get('type');
@@ -245,7 +245,7 @@
         event.target.value = event.target.value.replace(/[^0-9.,]/g, '').replace(',', '.');
     }
 
-    const PerSelect = document.getElementById("Per");
+    const PerSelect = document.getElementById("Period");
 
     PerSelect.addEventListener("change", (event) => {
         event.preventDefault();
@@ -256,7 +256,6 @@
             DELAY.style.display = "none";
             OK.style.display = "none";
             FLR.style.display = "none";
-
         } else {
             AHT.style.display = "block";
             DELAY.style.display = "block";
@@ -287,12 +286,11 @@
 
     accept.addEventListener("click", (event) => {
         event.preventDefault()
-        confirm('dadadadada')
         let Pos = document.getElementById('type').value;
         let Aht = document.getElementById('Aht').value;
         let Delay = document.getElementById('Delay').value;
         let Sc = document.getElementById('Sc').value;
-        let Per = document.getElementById('Per').value;
+        let Per = document.getElementById('Period').value;
         let Name = document.getElementById('Name').value;
         let ok = document.getElementById('Ok').value;
         let flr = document.getElementById('Flr').value;
@@ -315,27 +313,27 @@
     function confirmSubmit(data) {
         let message = ""
         const messageNull = 'Внимание, все поля должны быть заполнены!';
-        if (data["Per"] === "0") {
-            if (data['Pos'] === "" || data["Name"] === "" || data["Sc"] === "") {
+        if (data["per"] === "0") {
+            if (data['pos'] === "" || data["name"] === "" || data["sc"] === "") {
                 return confirm(messageNull);
             }
             message = "Внимание! Будет создана ачивка:\n" +
-            "\nДолжность: " + data["Pos"] +
-            "\nНазвание: " + data["Name"] +
-            "\nНачисление: " + data['Per'].replace('0', 'Ручное') +
-            "\nБаллы: " + data['Sc'];
+            "\nДолжность: " + data["pos"] +
+            "\nНазвание: " + data["name"] +
+            "\nНачисление: " + data['per'].replace('0', 'Ручное') +
+            "\nБаллы: " + data['sc'];
         }
         else{
-            if (data["Pos"] === "" || data["Name"] === "" || data["Aht"] === "" || data["Delay"] === "" || data["Sc"] === "") {
+            if (data["pos"] === "" || data["name"] === "" || data["aht"] === "" || data["delay"] === "" || data["sc"] === "") {
                 return confirm(messageNull);
             }
             message = "Внимание! Будет создана ачивка:\n" +
-            "\nДолжность: " + data["Pos"] +
-            "\nНазвание: " + data["Name"] +
-            "\nAHT: " + data["Aht"] +
-            "\nDelay: " + data["Delay"] +
-            "\nНачисление: " + data['Per'].replace('0', 'Ручное').replace('W', 'Еженедельное').replace('M', 'Ежемесячное') +
-            "\nБаллы: " + data['Sc'];
+            "\nДолжность: " + data["pos"] +
+            "\nНазвание: " + data["name"] +
+            "\nAHT: " + data["aht"] +
+            "\nDelay: " + data["delay"] +
+            "\nНачисление: " + data['per'].replace('0', 'Ручное').replace('W', 'Еженедельное').replace('M', 'Ежемесячное') +
+            "\nБаллы: " + data['sc'];
         }
         return confirm(message);
     }
