@@ -306,6 +306,7 @@
         }
         if (confirmSubmit(data)) {
             tg.sendData(JSON.stringify(data));
+            confirm(data);
             tg.close();
         }
     })
