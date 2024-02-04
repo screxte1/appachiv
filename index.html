@@ -282,15 +282,15 @@
 
     accept.addEventListener("click", (event) => {
         event.preventDefault()
-        let descrip = document.getElementById('type').value;
+        let Pos = document.getElementById('type').value;
         let Aht = document.getElementById('Aht').value;
         let Delay = document.getElementById('Delay').value;
         let Sc = document.getElementById('Sc').value;
         let Per = document.getElementById('Per').value;
-        let name = document.getElementById('Name').value;
+        let Name = document.getElementById('Name').value;
         let data = {
-            "descrip": descrip,
-            "Name": name,
+            "Pos": Pos,
+            "Name": Name,
             "Aht": Aht,
             "Delay": Delay,
             "Sc": Sc,
@@ -306,21 +306,21 @@
         let message = ""
         const messageNull = 'Внимание, все поля должны быть заполнены!';
         if (data["Per"] === "0") {
-            if (data['descrip'] === "" || data["Name"] === "" || data["Sc"] === "") {
+            if (data['Pos'] === "" || data["Name"] === "" || data["Sc"] === "") {
                 return confirm(messageNull);
             }
             message = "Внимание! Будет создана ачивка:\n" +
-            "\nДолжность: " + data["descrip"] +
+            "\nДолжность: " + data["Pos"] +
             "\nНазвание: " + data["Name"] +
             "\nНачисление: " + data['Per'].replace('0', 'Ручное') +
             "\nБаллы: " + data['Sc'];
         }
         else{
-            if (data["descrip"] === "" || data["Name"] === "" || data["Aht"] === "" || data["Delay"] === "" || data["Sc"] === "") {
+            if (data["Pos"] === "" || data["Name"] === "" || data["Aht"] === "" || data["Delay"] === "" || data["Sc"] === "") {
                 return confirm(messageNull);
             }
             message = "Внимание! Будет создана ачивка:\n" +
-            "\nДолжность: " + data["descrip"] +
+            "\nДолжность: " + data["Pos"] +
             "\nНазвание: " + data["Name"] +
             "\nAHT: " + data["Aht"] +
             "\nDelay: " + data["Delay"] +
