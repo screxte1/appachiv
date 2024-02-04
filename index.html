@@ -179,16 +179,16 @@
         </option>
         <option value="Эксперт второй линии" style="background-color: grey">Эксперт второй линии</option>
     </select>
-    <select class="form-control" id="period">
+    <select class="form-control" id="Per">
         <option value="M" style="background-color: grey">Месяц</option>
         <option value="W" style="background-color: grey">Неделя</option>
         <option value="0" style="background-color: grey">Ручное</option>
     </select>
-    <input type="text" placeholder="Название" id="ach_name">
-    <input type="text" placeholder="AHT" id="aht">
-    <input type="text" placeholder="Delay" id="delay">
-    <input type="text" placeholder="Баллы" id="point">
-    <input type="text" placeholder="OK" id="ok">
+    <input type="text" placeholder="Название" id="Name">
+    <input type="text" placeholder="AHT" id="Aht">
+    <input type="text" placeholder="Delay" id="Delay">
+    <input type="text" placeholder="Баллы" id="Sc">
+    <input type="text" placeholder="OK" id="Ok">
 
     <button id="add" title="Добавляет ачивку в базу">Создать</button>
     <button id="manager" title="В разработке, кнопка неактивна">Менеджер ачивок</button>
@@ -202,22 +202,22 @@
 </form>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script>
-    const NAME = document.getElementById('ach_name');
-    const AHT = document.getElementById('aht');
-    const DELAY = document.getElementById('delay');
-    const POINT = document.getElementById('point')
-    const OK = document.getElementById('ok');
+    const NAME = document.getElementById('Name');
+    const AHT = document.getElementById('Aht');
+    const DELAY = document.getElementById('Delay');
+    const POINT = document.getElementById('Sc')
+    const OK = document.getElementById('Ok');
     const url = new URL(window.location.href);
     const editAch = url.searchParams;
-    
+
     if (editAch) {
-        OK.value = editAch.get('ok');
-        DELAY.value = editAch.get('delay');
-        NAME.value = editAch.get('ach_name');
-        POINT.value = editAch.get('point');
-        AHT.value = editAch.get('aht');
-        if(editAch.get('period')){
-            document.getElementById('period').value = editAch.get('period');
+        OK.value = editAch.get('Ok');
+        DELAY.value = editAch.get('Delay');
+        NAME.value = editAch.get('Name');
+        POINT.value = editAch.get('Sc');
+        AHT.value = editAch.get('Aht');
+        if(editAch.get('Per')){
+            document.getElementById('Per').value = editAch.get('Per');
         }
         if(editAch.get('type')) {
             document.getElementById('type').value = editAch.get('type');
@@ -242,13 +242,13 @@
         event.target.value = event.target.value.replace(/[^0-9.,]/g, '').replace(',', '.');
     }
 
-    const periodSelect = document.getElementById("period");
+    const PerSelect = document.getElementById("Per");
 
-    periodSelect.addEventListener("change", (event) => {
+    PerSelect.addEventListener("change", (event) => {
         event.preventDefault();
-        const period = periodSelect.value;
+        const Per = PerSelect.value;
 
-        if (period === "0") {
+        if (Per === "0") {
             AHT.style.display = "none";
             DELAY.style.display = "none";
             OK.style.display = "none";
@@ -283,18 +283,18 @@
     accept.addEventListener("click", (event) => {
         event.preventDefault()
         let descrip = document.getElementById('type').value;
-        let aht = document.getElementById('aht').value;
-        let delay = document.getElementById('delay').value;
-        let point = document.getElementById('point').value;
-        let period = document.getElementById('period').value;
-        let name = document.getElementById('ach_name').value;
+        let Aht = document.getElementById('Aht').value;
+        let Delay = document.getElementById('Delay').value;
+        let Sc = document.getElementById('Sc').value;
+        let Per = document.getElementById('Per').value;
+        let name = document.getElementById('Name').value;
         let data = {
             "descrip": descrip,
-            "ach_name": name,
-            "aht": aht,
-            "delay": delay,
-            "point": point,
-            "period": period
+            "Name": name,
+            "Aht": Aht,
+            "Delay": Delay,
+            "Sc": Sc,
+            "Per": Per
         }
         if (confirmSubmit(data)) {
             tg.sendData(JSON.stringify(data));
@@ -305,27 +305,27 @@
     function confirmSubmit(data) {
         let message = ""
         const messageNull = 'Внимание, все поля должны быть заполнены!';
-        if (data["period"] === "0") {
-            if (data['descrip'] === "" || data["ach_name"] === "" || data["point"] === "") {
+        if (data["Per"] === "0") {
+            if (data['descrip'] === "" || data["Name"] === "" || data["Sc"] === "") {
                 return confirm(messageNull);
             }
             message = "Внимание! Будет создана ачивка:\n" +
             "\nДолжность: " + data["descrip"] +
-            "\nНазвание: " + data["ach_name"] +
-            "\nНачисление: " + data['period'].replace('0', 'Ручное') +
-            "\nБаллы: " + data['point'];
+            "\nНазвание: " + data["Name"] +
+            "\nНачисление: " + data['Per'].replace('0', 'Ручное') +
+            "\nБаллы: " + data['Sc'];
         }
         else{
-            if (data["descrip"] === "" || data["ach_name"] === "" || data["aht"] === "" || data["delay"] === "" || data["point"] === "") {
+            if (data["descrip"] === "" || data["Name"] === "" || data["Aht"] === "" || data["Delay"] === "" || data["Sc"] === "") {
                 return confirm(messageNull);
             }
             message = "Внимание! Будет создана ачивка:\n" +
             "\nДолжность: " + data["descrip"] +
-            "\nНазвание: " + data["ach_name"] +
-            "\nAHT: " + data["aht"] +
-            "\nDelay: " + data["delay"] +
-            "\nНачисление: " + data['period'].replace('0', 'Ручное').replace('W', 'Еженедельное').replace('M', 'Ежемесячное') +
-            "\nБаллы: " + data['point'];
+            "\nНазвание: " + data["Name"] +
+            "\nAHT: " + data["Aht"] +
+            "\nDelay: " + data["Delay"] +
+            "\nНачисление: " + data['Per'].replace('0', 'Ручное').replace('W', 'Еженедельное').replace('M', 'Ежемесячное') +
+            "\nБаллы: " + data['Sc'];
         }
         return confirm(message);
     }
