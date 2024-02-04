@@ -305,7 +305,7 @@
             "flr": flr
         }
         if (confirmSubmit(data)) {
-            tg.sendData(JSON.stringify(data));
+            tg.sendData(JSON.stringify(data.ToString()));
             confirm(data);
             tg.close();
         }
