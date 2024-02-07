@@ -328,7 +328,9 @@
             "period": Per,
             "ok": ok,
             "flr": flr,
-
+            "Interaction": Interaction,
+            "cc": cc,
+            "pok": pok
         }
         if (confirmSubmit(data)) {
             tg.sendData(JSON.stringify(data));
@@ -338,29 +340,38 @@
     function confirmSubmit(data) {
         let message = ""
         const messageNull = 'Внимание, все поля должны быть заполнены!';
-        if (data["period"] === "0") {
-            if (data['description'] === "" || data["name"] === "" || data["point"] === "") {
-                return confirm(messageNull);
+        if (data["Interaction"] === ""){
+            if (data["period"] === "0") {
+                if (data['description'] === "" || data["name"] === "" || data["point"] === "") {
+                    return confirm(messageNull);
+                }
+                message = "Внимание! Будет создана ачивка:\n" +
+                "\nДолжность: " + data["description"] +
+                "\nНазвание: " + data["name"] +
+                "\nНачисление: " + data['period'].replace('0', 'Ручное') +
+                "\nБаллы: " + data['point'];
             }
-            message = "Внимание! Будет создана ачивка:\n" +
-            "\nДолжность: " + data["description"] +
-            "\nНазвание: " + data["name"] +
-            "\nНачисление: " + data['period'].replace('0', 'Ручное') +
-            "\nБаллы: " + data['point'];
+            else{
+                if (data["description"] === "" || data["name"] === "" || data["aht"] === "" || data["delay"] === "" || data["point"] === "") {
+                    return confirm(messageNull);
+                }
+                message = "Внимание! Будет создана ачивка:\n" +
+                "\nДолжность: " + data["description"] +
+                "\nНазвание: " + data["name"] +
+                "\nAHT: " + data["aht"] +
+                "\nDelay: " + data["delay"] +
+                "\nНачисление: " + data['period'].replace('0', 'Ручное').replace('W', 'Еженедельное').replace('M', 'Ежемесячное') +
+                "\nFLR: " + data['flr'] +
+                "\nOK: " + data['ok'] +
+                "\nБаллы: " + data['point'];
+            }
         }
         else{
-            if (data["description"] === "" || data["name"] === "" || data["aht"] === "" || data["delay"] === "" || data["point"] === "") {
-                return confirm(messageNull);
-            }
-            message = "Внимание! Будет создана ачивка:\n" +
-            "\nДолжность: " + data["description"] +
-            "\nНазвание: " + data["name"] +
-            "\nAHT: " + data["aht"] +
-            "\nDelay: " + data["delay"] +
-            "\nНачисление: " + data['period'].replace('0', 'Ручное').replace('W', 'Еженедельное').replace('M', 'Ежемесячное') +
-            "\nFLR: " + data['flr'] +
-            "\nOK: " + data['ok'] +
-            "\nБаллы: " + data['point'];
+            message = "Внимание! Будет создана награда:\n" +
+                "\nНазвание: " + data["name"] +
+                "\nДолжность: " + data["description"] +
+                "\nБаллы: " + data['point'] +
+                "\nОтветственный: " + data["Interaction"];
         }
         return confirm(message);
     }
