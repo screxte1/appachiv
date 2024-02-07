@@ -200,7 +200,7 @@
     <input type="text" placeholder="FLR" style="display: none" id="Flr">
     <input type="text" placeholder="CC" style="display: none" id="callCount">
     <input type="text" placeholder="pok" style="display: none" id="Pok">
-    <select class="form-control"  style="display: none"id="Period">
+    <select class="form-control" style="display: none" id="Period">
         <option value="M" style="background-color: grey">Месяц</option>
         <option value="W" style="background-color: grey">Неделя</option>
         <option value="0" style="background-color: grey">Ручное</option>
@@ -232,8 +232,7 @@
             Interaction.style.display = 'block';
             document.getElementById('h4').style.display = 'block';
 
-        }
-        else{
+        } else {
             document.getElementById('h3').style.display = 'block';
             OK.style.display = 'block';
             DELAY.style.display = 'block';
@@ -248,10 +247,10 @@
             POINT.value = editAch.get('Sc');
             AHT.value = editAch.get('Aht');
             FLR.value = editAch.get('Flr');
-            if(editAch.get('Period')){
+            if (editAch.get('Period')) {
                 document.getElementById('Period').value = editAch.get('Period');
             }
-            if(editAch.get('type')) {
+            if (editAch.get('type')) {
                 document.getElementById('type').value = editAch.get('type');
             }
         }
@@ -337,43 +336,43 @@
             tg.close();
         }
     })
+
     function confirmSubmit(data) {
         let message = ""
         const messageNull = 'Внимание, все поля должны быть заполнены!';
-        if (data["Interaction"] === ""){
-            if (data["period"] === "0") {
-                if (data['description'] === "" || data["name"] === "" || data["point"] === "") {
-                    return confirm(messageNull);
-                }
-                message = "Внимание! Будет создана ачивка:\n" +
-                "\nДолжность: " + data["description"] +
-                "\nНазвание: " + data["name"] +
-                "\nНачисление: " + data['period'].replace('0', 'Ручное') +
-                "\nБаллы: " + data['point'];
-            }
-            else{
-                if (data["description"] === "" || data["name"] === "" || data["aht"] === "" || data["delay"] === "" || data["point"] === "") {
-                    return confirm(messageNull);
-                }
-                message = "Внимание! Будет создана ачивка:\n" +
-                "\nДолжность: " + data["description"] +
-                "\nНазвание: " + data["name"] +
-                "\nAHT: " + data["aht"] +
-                "\nDelay: " + data["delay"] +
-                "\nНачисление: " + data['period'].replace('0', 'Ручное').replace('W', 'Еженедельное').replace('M', 'Ежемесячное') +
-                "\nFLR: " + data['flr'] +
-                "\nOK: " + data['ok'] +
-                "\nБаллы: " + data['point'];
-            }
-        }
-        else{
+        if (data["Interaction"] === "1") {
             message = "Внимание! Будет создана награда:\n" +
                 "\nНазвание: " + data["name"] +
                 "\nДолжность: " + data["description"] +
                 "\nБаллы: " + data['point'] +
                 "\nОтветственный: " + data["Interaction"];
+            return confirm(message);
+        } else {
+            if (data["period"] === "0") {
+                if (data['description'] === "" || data["name"] === "" || data["point"] === "") {
+                    return confirm(messageNull);
+                }
+                message = "Внимание! Будет создана ачивка:\n" +
+                    "\nДолжность: " + data["description"] +
+                    "\nНазвание: " + data["name"] +
+                    "\nНачисление: " + data['period'].replace('0', 'Ручное') +
+                    "\nБаллы: " + data['point'];
+            } else {
+                if (data["description"] === "" || data["name"] === "" || data["aht"] === "" || data["delay"] === "" || data["point"] === "") {
+                    return confirm(messageNull);
+                }
+                message = "Внимание! Будет создана ачивка:\n" +
+                    "\nДолжность: " + data["description"] +
+                    "\nНазвание: " + data["name"] +
+                    "\nAHT: " + data["aht"] +
+                    "\nDelay: " + data["delay"] +
+                    "\nНачисление: " + data['period'].replace('0', 'Ручное').replace('W', 'Еженедельное').replace('M', 'Ежемесячное') +
+                    "\nFLR: " + data['flr'] +
+                    "\nOK: " + data['ok'] +
+                    "\nБаллы: " + data['point'];
+            }
+            return confirm(message);
         }
-        return confirm(message);
     }
 </script>
 
