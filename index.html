@@ -322,6 +322,9 @@
         let Name = document.getElementById('Name').value;
         let ok = document.getElementById('Ok').value;
         let flr = document.getElementById('Flr').value;
+        let Interaction = document.getElementById('Interaction').value;
+        let cc = document.getElementById('cc').value;
+        let pok = document.getElementById('pok').value;
         let data = {
             "description": Pos,
             "name": Name,
@@ -330,10 +333,13 @@
             "point": Sc,
             "period": Per,
             "ok": ok,
-            "flr": flr
+            "flr": flr,
+            "Interaction": Interaction,
+            "cc": cc,
+            "pok": pok,
         }
         if (confirmSubmit(data)) {
-            tg.sendData(JSON.stringify(data.toString()));
+            tg.sendData(JSON.stringify(data));
             tg.close();
         }
     })
