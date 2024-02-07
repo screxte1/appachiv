@@ -339,10 +339,10 @@
 
     function confirmSubmit(data) {
         let message = ""
-        const messageNull = 'Внимание, все поля должны быть заполнены!';
-        if (data["Interaction"] === "stp_rassylka_mip@ertelecom.ru" ||
-            data["Interaction"] === "stp_rassylka_gruppa_otcenki_kachestva@ertelecom.ru" ||
-            data["Interaction"] === "Старший") {
+        if (data['description'] === "" || data["name"] === "" || data["point"] === "") {
+            return confirm("Внимание, все поля должны быть заполнены!");
+        }
+        if (document.getElementById('h4').style.display === 'block') {
             message = "Внимание! Будет создана награда:\n" +
                 "\nНазвание: " + data["name"] +
                 "\nДолжность: " + data["description"] +
@@ -351,18 +351,12 @@
             return confirm(message);
         } else {
             if (data["period"] === "0") {
-                if (data['description'] === "" || data["name"] === "" || data["point"] === "") {
-                    return confirm(messageNull);
-                }
                 message = "Внимание! Будет создана ачивка:\n" +
                     "\nДолжность: " + data["description"] +
                     "\nНазвание: " + data["name"] +
                     "\nНачисление: " + data['period'].replace('0', 'Ручное') +
                     "\nБаллы: " + data['point'];
             } else {
-                if (data["description"] === "" || data["name"] === "" || data["aht"] === "" || data["delay"] === "" || data["point"] === "") {
-                    return confirm(messageNull);
-                }
                 message = "Внимание! Будет создана ачивка:\n" +
                     "\nДолжность: " + data["description"] +
                     "\nНазвание: " + data["name"] +
