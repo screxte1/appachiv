@@ -79,7 +79,14 @@
         }
 
         form h3 {
-            font-size: 32px;
+            font-size: 30px;
+            font-weight: 500;
+            line-height: 42px;
+            text-align: center;
+        }
+
+        form h4 {
+            font-size: 30px;
             font-weight: 500;
             line-height: 42px;
             text-align: center;
@@ -169,7 +176,8 @@
     <div class="shape"></div>
 </div>
 <form id="mainForm" style="display: block">
-    <h3>Добавление ачивки</h3>
+    <h3 class="text" id="h3" style="display: none">Добавление ачивки</h3>
+    <h4 class="text" id="h4" style="display: none">Добавление награды</h4>
     <select class="form-control" id="type">
         <option value="Специалист первой линии" style="background-color: grey">Специалист первой линии</option>
         <option value="Ведущий специалист первой линии" style="background-color: grey">Ведущий специалист первой линии
@@ -179,20 +187,26 @@
         </option>
         <option value="Эксперт второй линии" style="background-color: grey">Эксперт второй линии</option>
     </select>
-    <select class="form-control" id="Period">
+    <input type="text" placeholder="Название" id="Name">
+    <input type="text" placeholder="Баллы" id="Sc">
+    <select class="form-control" style="display: none" id="Interaction">
+        <option value="stp_rassylka_mip@ertelecom.ru" style="background-color: grey">МИП</option>
+        <option value="stp_rassylka_gruppa_otcenki_kachestva@ertelecom.ru" style="background-color: grey">ГОК</option>
+        <option value="Старший" style="background-color: grey">Старший</option>
+    </select>
+    <input type="text" placeholder="AHT" style="display: none" id="Aht">
+    <input type="text" placeholder="Delay" style="display: none" id="Delay">
+    <input type="text" placeholder="OK" style="display: none" id="Ok">
+    <input type="text" placeholder="FLR" style="display: none" id="Flr">
+    <input type="text" placeholder="CC" style="display: none" id="callCount">
+    <input type="text" placeholder="pok" style="display: none" id="Pok">
+    <select class="form-control"  style="display: none"id="Period">
         <option value="M" style="background-color: grey">Месяц</option>
         <option value="W" style="background-color: grey">Неделя</option>
         <option value="0" style="background-color: grey">Ручное</option>
     </select>
-    <input type="text" placeholder="Название" id="Name">
-    <input type="text" placeholder="AHT" id="Aht">
-    <input type="text" placeholder="Delay" id="Delay">
-    <input type="text" placeholder="Баллы" id="Sc">
-    <input type="text" placeholder="OK" id="Ok">
-    <input type="text" placeholder="FLR" id="Flr">
 
-    <button id="add" title="Добавляет ачивку в базу">Создать</button>
-    <button id="manager" title="В разработке, кнопка неактивна">Менеджер ачивок</button>
+    <button id="add" title="Добавляет ачивку в базу">Отправить</button>
 </form>
 <form id="managerForm" style="display: none">
     <h3>Менеджер ачивок</h3>
@@ -210,21 +224,38 @@
     const OK = document.getElementById('Ok');
     const FLR = document.getElementById('Flr');
     const url = new URL(window.location.href);
+    const Interaction = document.getElementById('Interaction')
     const editAch = url.searchParams;
 
     if (editAch) {
-        OK.value = editAch.get('Ok');
-        DELAY.value = editAch.get('Delay');
-        NAME.value = editAch.get('Name');
-        POINT.value = editAch.get('Sc');
-        AHT.value = editAch.get('Aht');
-        FLR.value = editAch.get('Flr');
-        if(editAch.get('Period')){
-            document.getElementById('Period').value = editAch.get('Period');
+        if (editAch.get('Interaction')) {
+            Interaction.style.display = 'block';
+            document.getElementById('h4').style.display = 'block';
+
         }
-        if(editAch.get('type')) {
-            document.getElementById('type').value = editAch.get('type');
+        else{
+            document.getElementById('h3').style.display = 'block';
+            OK.style.display = 'block';
+            DELAY.style.display = 'block';
+            NAME.style.display = 'block';
+            POINT.style.display = 'block';
+            AHT.style.display = 'block';
+            FLR.style.display = 'block';
+            document.getElementById('Period').style.display = 'block';
+            document.getElementById('type').style.display = 'block';
+            DELAY.value = editAch.get('Delay');
+            NAME.value = editAch.get('Name');
+            POINT.value = editAch.get('Sc');
+            AHT.value = editAch.get('Aht');
+            FLR.value = editAch.get('Flr');
+            if(editAch.get('Period')){
+                document.getElementById('Period').value = editAch.get('Period');
+            }
+            if(editAch.get('type')) {
+                document.getElementById('type').value = editAch.get('type');
+            }
         }
+
 
     } else {
         console.log("No data");
@@ -279,9 +310,6 @@
         const message = 'В разработке.';
         event.preventDefault()
         return confirm(message);
-        /*document.getElementById('mainForm').style.display = 'none';
-        document.getElementById('managerForm').style.display = 'block';
-        */
     })
 
     accept.addEventListener("click", (event) => {
@@ -305,7 +333,7 @@
             "flr": flr
         }
         if (confirmSubmit(data)) {
-            tg.sendData(JSON.stringify(data));
+            tg.sendData(JSON.stringify(data.toString()));
             tg.close();
         }
     })
