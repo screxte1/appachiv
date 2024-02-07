@@ -340,7 +340,9 @@
     function confirmSubmit(data) {
         let message = ""
         const messageNull = 'Внимание, все поля должны быть заполнены!';
-        if (data["Interaction"] === "1") {
+        if (data["Interaction"] === "stp_rassylka_mip@ertelecom.ru" ||
+            data["Interaction"] === "stp_rassylka_gruppa_otcenki_kachestva@ertelecom.ru" ||
+            data["Interaction"] === "Старший") {
             message = "Внимание! Будет создана награда:\n" +
                 "\nНазвание: " + data["name"] +
                 "\nДолжность: " + data["description"] +
