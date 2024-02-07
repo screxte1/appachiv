@@ -340,6 +340,13 @@
     function confirmSubmit(data) {
         let message = ""
         const messageNull = 'Внимание, все поля должны быть заполнены!';
+        if (data['Interaction'] === "1") {
+            message = "Внимание, будет создано достижение:\n" +
+            "\nНазвание: " + data["name"] +
+            "\nБаллы: " + data['point'] +
+            "\nОтветственный: " + data['Interaction'];
+        }
+        else{
         if (data["period"] === "0") {
             if (data['description'] === "" || data["name"] === "" || data["point"] === "") {
                 return confirm(messageNull);
@@ -363,7 +370,7 @@
             "\nFLR: " + data['flr'] +
             "\nOK: " + data['ok'] +
             "\nБаллы: " + data['point'];
-        }
+        }}
         return confirm(message);
     }
 </script>
