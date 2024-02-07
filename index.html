@@ -297,7 +297,6 @@
 
     let tg = window.Telegram.WebApp;
     let accept = document.getElementById("add");
-    let manager = document.getElementById("manager");
     let back = document.getElementById("backButton")
 
     back.addEventListener("click", (event) => {
@@ -305,12 +304,7 @@
         document.getElementById('mainForm').style.display = 'block';
         document.getElementById('managerForm').style.display = 'none';
     })
-
-    manager.addEventListener("click", (event) => {
-        const message = 'В разработке.';
-        event.preventDefault()
-        return confirm(message);
-    })
+    
 
     accept.addEventListener("click", (event) => {
         event.preventDefault()
