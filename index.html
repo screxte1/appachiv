@@ -229,10 +229,12 @@
     const editAch = url.searchParams;
 
     if (editAch) {
+        if (editAch.get('name')){
+            NAME.disabled = true;
+        }
         if (editAch.get('Interaction')) {
             Interaction.style.display = 'block';
             document.getElementById('h4').style.display = 'block';
-
         } else {
             document.getElementById('h3').style.display = 'block';
             OK.style.display = 'block';
@@ -245,6 +247,7 @@
             document.getElementById('type').style.display = 'block';
             DELAY.value = editAch.get('Delay');
             NAME.value = editAch.get('Name');
+            OK.value = editAch.get('Ok');
             POINT.value = editAch.get('Sc');
             AHT.value = editAch.get('Aht');
             FLR.value = editAch.get('Flr');
