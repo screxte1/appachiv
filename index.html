@@ -240,7 +240,7 @@
             }
             else{
                 document.getElementById('type').value = editAch.get('type');
-                document.getElementById('Interaction').value = editAch.get('Interaction')
+                document.getElementById('Interaction').value = editAch.get('otv')
             }
             Interaction.style.display = 'block';
             document.getElementById('h4').style.display = 'block';
@@ -335,7 +335,7 @@
         let cc = document.getElementById('callCount').value;
         let pok = document.getElementById('Pok').value;
         let data = {
-            "description": Pos,
+            "position": Pos,
             "name": Name,
             "aht": Aht,
             "delay": Delay,
@@ -343,7 +343,7 @@
             "period": Per,
             "ok": ok,
             "flr": flr,
-            "Interaction": Interaction,
+            "otv": Interaction,
             "cc": cc,
             "pok": pok
         }
@@ -355,26 +355,26 @@
 
     function confirmSubmit(data) {
         let message = ""
-        if (data['description'] === "" || data["name"] === "" || data["point"] === "") {
+        if (data['position'] === "" || data["name"] === "" || data["point"] === "") {
             return confirm("Внимание, все поля должны быть заполнены!");
         }
         if (document.getElementById('h4').style.display === 'block') {
             message = "Внимание! Будет создана награда:\n" +
                 "\nНазвание: " + data["name"] +
-                "\nДолжность: " + data["description"] +
+                "\nДолжность: " + data["position"] +
                 "\nБаллы: " + data['point'] +
                 "\nОтветственный: " + data["Interaction"];
             return confirm(message);
         } else {
             if (data["period"] === "0") {
                 message = "Внимание! Будет создана ачивка:\n" +
-                    "\nДолжность: " + data["description"] +
+                    "\nДолжность: " + data["position"] +
                     "\nНазвание: " + data["name"] +
                     "\nНачисление: " + data['period'].replace('0', 'Ручное') +
                     "\nБаллы: " + data['point'];
             } else {
                 message = "Внимание! Будет создана ачивка:\n" +
-                    "\nДолжность: " + data["description"] +
+                    "\nДолжность: " + data["position"] +
                     "\nНазвание: " + data["name"] +
                     "\nAHT: " + data["aht"] +
                     "\nDelay: " + data["delay"] +
