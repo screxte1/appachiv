@@ -201,6 +201,7 @@
     <input type="text" placeholder="FLR" style="display: none" id="Flr">
     <input type="text" placeholder="CC" style="display: none" id="callCount">
     <input type="text" placeholder="pok" style="display: none" id="Pok">
+    <input type="text" placeholder="Описание" id="AboutAch">
     <select class="form-control" style="display: none" id="Period">
         <option value="M" style="background-color: grey">Месяц</option>
         <option value="W" style="background-color: grey">Неделя</option>
@@ -240,7 +241,7 @@
             }
             else{
                 document.getElementById('type').value = editAch.get('type');
-                document.getElementById('Interaction').value = editAch.get('Interaction')
+                document.getElementById('Interaction').value = editAch.get('otv')
             }
             Interaction.style.display = 'block';
             document.getElementById('h4').style.display = 'block';
@@ -334,6 +335,7 @@
         let Interaction = document.getElementById('Interaction').value;
         let cc = document.getElementById('callCount').value;
         let pok = document.getElementById('Pok').value;
+        let AboutAch = document.getElementById('AboutAch').value;
         let data = {
             "position": Pos,
             "name": Name,
@@ -343,9 +345,10 @@
             "period": Per,
             "ok": ok,
             "flr": flr,
-            "interaction": Interaction,
+            "otv": Interaction,
             "cc": cc,
-            "pok": pok
+            "pok": pok,
+            "AboutAch": AboutAch
         }
         if (confirmSubmit(data)) {
             tg.sendData(JSON.stringify(data));
@@ -363,7 +366,8 @@
                 "\nНазвание: " + data["name"] +
                 "\nДолжность: " + data["position"] +
                 "\nБаллы: " + data['point'] +
-                "\nОтветственный: " + data["interaction"];
+                "\nОтветственный: " + data["otv"] +
+                "\nОписание: " + data["AboutAch"];
             return confirm(message);
         } else {
             if (data["period"] === "0") {
@@ -371,7 +375,8 @@
                     "\nДолжность: " + data["position"] +
                     "\nНазвание: " + data["name"] +
                     "\nНачисление: " + data['period'].replace('0', 'Ручное') +
-                    "\nБаллы: " + data['point'];
+                    "\nБаллы: " + data['point'] +
+                    "\nОписание: " + data['AboutAch'];
             } else {
                 message = "Внимание! Будет создана ачивка:\n" +
                     "\nДолжность: " + data["position"] +
@@ -381,7 +386,8 @@
                     "\nНачисление: " + data['period'].replace('0', 'Ручное').replace('W', 'Еженедельное').replace('M', 'Ежемесячное') +
                     "\nFLR: " + data['flr'] +
                     "\nOK: " + data['ok'] +
-                    "\nБаллы: " + data['point'];
+                    "\nБаллы: " + data['point'] +
+                    "\nОписание: " + data['AboutAch'];
             }
             return confirm(message);
         }
