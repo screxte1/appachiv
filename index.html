@@ -436,24 +436,36 @@
         let Name = document.getElementById('Name').value;
         let okRadius1 = document.getElementById('radiusOK1').value;
         let okRadius2 = document.getElementById('radiusOK2').value;
-        let flrRadius1 = document.getElementById('flrRadius1').value;
-        let flrRadius2 = document.getElementById('flrRadius2').value;
+        let radiusFLR1 = document.getElementById('radiusFLR1').value;
+        let radiusFLR2 = document.getElementById('radiusFLR2').value;
         let Interaction = document.getElementById('Interaction').value;
         let cc = document.getElementById('callCount').value;
         let pok = document.getElementById('Pok').value;
         let AboutAch = document.getElementById('AboutAch').value;
-        if(AhtRadius1 == null){
+        if(AhtRadius1 === null){
             AhtRadius1 = 0
+            if(AhtRadius2 === null){
+                AhtRadius2 = 0
+            }
         }
-        if(DelayRadius1 == null){
+        if(DelayRadius1 === null){
             DelayRadius1 = 0
+            if(DelayRadius2 === null){
+                DelayRadius2 = 0
+            }
         }
-        if(okRadius1 == null) {
+        if(okRadius1 === null) {
             okRadius1 = 0
+            if(okRadius2 === null){
+                okRadius2 = 0
+            }
         }
-        if(flrRadius1 == null){
-            okRadius1 = 0
-        }        
+        if(radiusFLR1 === null){
+            radiusFLR1 = 0
+            if(radiusFLR2 === null){
+                radiusFLR1 = 0
+            }
+        }
         let data = {
             "position": Pos,
             "name": Name,
@@ -462,7 +474,7 @@
             "point": Sc,
             "period": Per,
             "ok": [okRadius1, okRadius2],
-            "flr": [flrRadius1, flrRadius2],
+            "flr": [radiusFLR1, radiusFLR2],
             "interaction": Interaction,
             "cc": cc,
             "pok": pok,
