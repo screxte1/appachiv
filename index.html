@@ -101,7 +101,7 @@
 
         input {
             display: block;
-            height: 50px;
+            height: 40px;
             width: 100%;
             background-color: rgba(255, 255, 255, 0.07);
             border-radius: 3px;
@@ -134,7 +134,7 @@
 
         .form-control {
             display: block;
-            height: 50px;
+            height: 40px;
             width: 100%;
             color: #f5f5f5;
             background-color: rgba(255, 255, 255, 0.07);
@@ -166,6 +166,38 @@
 
         .social i {
             margin-right: 4px;
+        }
+
+        #CheckboxAHT {
+            display: flex;
+            flex-wrap: wrap;
+            height: 20px;
+            right: 90px;
+            align-items: center;
+        }
+
+        #CheckboxFLR {
+            display: flex;
+            flex-wrap: wrap;
+            height: 20px;
+            right: 90px;
+            align-items: center;
+        }
+
+        #CheckboxOK {
+            display: flex;
+            flex-wrap: wrap;
+            height: 20px;
+            right: 90px;
+            align-items: center;
+        }
+
+        #CheckboxDelay {
+            display: flex;
+            flex-wrap: wrap;
+            height: 20px;
+            right: 90px;
+            align-items: center;
         }
 
     </style>
@@ -207,9 +239,24 @@
         <option value="W" style="background-color: grey">Неделя</option>
         <option value="0" style="background-color: grey">Ручное</option>
     </select>
+    <class id ='228'>
+        <label for="CheckboxAHT"><input type="checkbox" id="CheckboxAHT" style="position: fixed">AHT</label>
+        <input class="tripleS" type="text" placeholder="Нижняя граница AHT" style="display: none" id="radiusAHT1">
+        <input class="tripleS" type="text" placeholder="Верхняя граница AHT" style="display: none" id="radiusAHT2">
+        <label for="CheckboxFLR"><input type="checkbox" id="CheckboxFLR" style="position: fixed">FLR</label>
+        <input class="tripleS" type="text" placeholder="Нижняя граница FLR" style="display: none" id="radiusFLR1">
+        <input class="tripleS" type="text" placeholder="Верхняя граница FLR" style="display: none" id="radiusFLR2">
+        <label for="CheckboxOK"><input type="checkbox" id="CheckboxOK" style="position: fixed">OK</label>
+        <input class="tripleS" type="text" placeholder="Нижняя граница OK" style="display: none" id="radiusOK1">
+        <input class="tripleS" type="text" placeholder="Верхняя граница OK" style="display: none" id="radiusOK2">
+        <label for="CheckboxDelay"><input type="checkbox" id="CheckboxDelay" style="position: fixed">Delay</label>
+        <input class="tripleS" type="text" placeholder="Нижняя граница Delay" style="display: none" id="radiusDelay1">
+        <input class="tripleS" type="text" placeholder="Верхняя граница Delay" style="display: none" id="radiusDelay2">
+    </class>
 
     <button id="add" title="Добавляет ачивку в базу">Отправить</button>
 </form>
+
 <form id="managerForm" style="display: none">
     <h3>Менеджер ачивок</h3>
     <select class="form-control" id="manager_ach">
@@ -217,6 +264,8 @@
     <button id="delete">Удалить</button>
     <button id="backButton">Назад</button>
 </form>
+
+
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script>
     const NAME = document.getElementById('Name');
@@ -230,16 +279,14 @@
     const editAch = url.searchParams;
 
     if (editAch) {
-        if (editAch.get('name')){
+        if (editAch.get('name')) {
             NAME.disabled = true;
         }
         if (editAch.get('Interaction')) {
-            if (editAch.get('Interaction') === "1")
-            {
+            if (editAch.get('Interaction') === "1") {
                 document.getElementById('Interaction').value = "Ответственный"
                 document.getElementById('type').value = "Специалист первой линии"
-            }
-            else{
+            } else {
                 document.getElementById('type').value = editAch.get('type');
                 document.getElementById('Interaction').value = editAch.get('otv')
             }
@@ -250,12 +297,12 @@
 
         } else {
             document.getElementById('h3').style.display = 'block';
-            OK.style.display = 'block';
-            DELAY.style.display = 'block';
-            NAME.style.display = 'block';
-            POINT.style.display = 'block';
-            AHT.style.display = 'block';
-            FLR.style.display = 'block';
+            // OK.style.display = 'block';
+            // DELAY.style.display = 'block';
+            // NAME.style.display = 'block';
+            // POINT.style.display = 'block';
+            // AHT.style.display = 'block';
+            // FLR.style.display = 'block';
             document.getElementById('Period').style.display = 'block';
             document.getElementById('type').style.display = 'block';
             DELAY.value = editAch.get('Delay');
@@ -321,6 +368,61 @@
         document.getElementById('managerForm').style.display = 'none';
     })
 
+    let ahtCheckbox = document.getElementById("CheckboxAHT");
+    let ahtRadius1 = document.getElementById("radiusAHT1");
+    let ahtRadius2 = document.getElementById("radiusAHT2");
+
+    ahtCheckbox.addEventListener("change", (event) => {
+      if (event.target.checked) {
+        ahtRadius1.style.display = "block";
+        ahtRadius2.style.display = "block";
+      } else {
+        ahtRadius1.style.display = "none";
+        ahtRadius2.style.display = "none";
+      }
+    });
+
+    let flrCheckbox = document.getElementById("CheckboxFLR");
+    let flrRadius1 = document.getElementById("radiusFLR1");
+    let flrRadius2 = document.getElementById("radiusFLR2");
+
+    flrCheckbox.addEventListener("change", (event) => {
+        if (event.target.checked) {
+            flrRadius1.style.display = "block";
+            flrRadius2.style.display = "block";
+        } else {
+            flrRadius1.style.display = "none";
+            flrRadius2.style.display = "none";
+        }
+    });
+
+    let okCheckbox = document.getElementById("CheckboxOK");
+    let okRadius1 = document.getElementById("radiusOK1");
+    let okRadius2 = document.getElementById("radiusOK2");
+
+    okCheckbox.addEventListener("change", (event) => {
+        if (event.target.checked) {
+            okRadius1.style.display = "block";
+            okRadius2.style.display = "block";
+        } else {
+            okRadius1.style.display = "none";
+            okRadius2.style.display = "none";
+        }
+    });
+
+    let delayCheckbox = document.getElementById("CheckboxDelay");
+    let delayRadius1 = document.getElementById("radiusDelay1");
+    let delayRadius2 = document.getElementById("radiusDelay2");
+
+    delayCheckbox.addEventListener("change", (event) => {
+        if (event.target.checked) {
+            delayRadius1.style.display = "block";
+            delayRadius2.style.display = "block";
+        } else {
+            delayRadius1.style.display = "none";
+            delayRadius2.style.display = "none";
+        }
+    });
 
     accept.addEventListener("click", (event) => {
         event.preventDefault()
