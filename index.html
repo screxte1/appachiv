@@ -427,26 +427,42 @@
     accept.addEventListener("click", (event) => {
         event.preventDefault()
         let Pos = document.getElementById('type').value;
-        let Aht = document.getElementById('Aht').value;
-        let Delay = document.getElementById('Delay').value;
+        let AhtRadius1 = document.getElementById('radiusAHT1').value;
+        let AhtRadius2 = document.getElementById('radiusAHT2').value;
+        let DelayRadius1 = document.getElementById('radiusDelay1').value;
+        let DelayRadius2 = document.getElementById('radiusDelay2').value;
         let Sc = document.getElementById('Sc').value;
         let Per = document.getElementById('Period').value;
         let Name = document.getElementById('Name').value;
-        let ok = document.getElementById('Ok').value;
-        let flr = document.getElementById('Flr').value;
+        let okRadius1 = document.getElementById('radiusOK1').value;
+        let okRadius2 = document.getElementById('radiusOK2').value;
+        let flrRadius1 = document.getElementById('flrRadius1').value;
+        let flrRadius2 = document.getElementById('flrRadius2').value;
         let Interaction = document.getElementById('Interaction').value;
         let cc = document.getElementById('callCount').value;
         let pok = document.getElementById('Pok').value;
         let AboutAch = document.getElementById('AboutAch').value;
+        if(AhtRadius1 == null){
+            AhtRadius1 = 0
+        }
+        if(DelayRadius1 == null){
+            DelayRadius1 = 0
+        }
+        if(okRadius1 == null) {
+            okRadius1 = 0
+        }
+        if(flrRadius1 == null){
+            okRadius1 = 0
+        }        
         let data = {
             "position": Pos,
             "name": Name,
-            "aht": Aht,
-            "delay": Delay,
+            "aht": [AhtRadius1, AhtRadius2],
+            "delay": [DelayRadius1, DelayRadius2],
             "point": Sc,
             "period": Per,
-            "ok": ok,
-            "flr": flr,
+            "ok": [okRadius1, okRadius2],
+            "flr": [flrRadius1, flrRadius2],
             "interaction": Interaction,
             "cc": cc,
             "pok": pok,
