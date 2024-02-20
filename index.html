@@ -339,24 +339,24 @@
         event.target.value = event.target.value.replace(/[^0-9.,]/g, '').replace(',', '.');
     }
 
-    const PerSelect = document.getElementById("Period");
-
-    PerSelect.addEventListener("change", (event) => {
-        event.preventDefault();
-        const Per = PerSelect.value;
-
-        if (Per === "0") {
-            AHT.style.display = "none";
-            DELAY.style.display = "none";
-            OK.style.display = "none";
-            FLR.style.display = "none";
-        } else {
-            AHT.style.display = "block";
-            DELAY.style.display = "block";
-            OK.style.display = "block";
-            FLR.style.display = "block";
-        }
-    });
+    // const PerSelect = document.getElementById("Period");
+    //
+    // PerSelect.addEventListener("change", (event) => {
+    //     event.preventDefault();
+    //     const Per = PerSelect.value;
+    //
+    //     if (Per === "0") {
+    //         AHT.style.display = "none";
+    //         DELAY.style.display = "none";
+    //         OK.style.display = "none";
+    //         FLR.style.display = "none";
+    //     } else {
+    //         AHT.style.display = "block";
+    //         DELAY.style.display = "block";
+    //         OK.style.display = "block";
+    //         FLR.style.display = "block";
+    //     }
+    // });
 
     let tg = window.Telegram.WebApp;
     let accept = document.getElementById("add");
