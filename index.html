@@ -226,6 +226,7 @@
         <option value="МИП" style="background-color: grey">МИП</option>
         <option value="ГОК" style="background-color: grey">ГОК</option>
         <option value="Старший" style="background-color: grey">Старший</option>
+        <option value="Администратор" style="background-color: grey">Администратор</option>
     </select>
     <input type="text" placeholder="AHT" style="display: none" id="Aht">
     <input type="text" placeholder="Delay" style="display: none" id="Delay">
@@ -286,6 +287,9 @@
             if (editAch.get('Interaction') === "1") {
                 document.getElementById('Interaction').value = "Ответственный"
                 document.getElementById('type').value = "Специалист первой линии"
+                document.getElementById('CheckboxAHT').style.display = "none";
+                document.getElementById('228').style.display = "none";
+
             } else {
                 document.getElementById('type').value = editAch.get('type');
                 document.getElementById('Interaction').value = editAch.get('otv')
